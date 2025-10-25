@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ParallaxStars } from '@/components/ui/parallax-stars';
+import React from "react";
+import { motion } from "framer-motion";
+import { ParallaxStars } from "@/components/ui/parallax-stars";
 
 export default function AnimatedStars() {
   return (
-    <motion.div 
+    <motion.div
       className="fixed inset-0 w-full h-full z-0 pointer-events-none"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -15,4 +15,4 @@ export default function AnimatedStars() {
       <ParallaxStars />
     </motion.div>
   );
-} 
+}

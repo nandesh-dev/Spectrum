@@ -1,77 +1,85 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  
-  const [formStatus, setFormStatus] = useState<{
-    status: 'idle' | 'loading' | 'success' | 'error';
-    message: string;
-  }>({
-    status: 'idle',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const [formStatus, setFormStatus] = useState<{
+    status: "idle" | "loading" | "success" | "error";
+    message: string;
+  }>({
+    status: "idle",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     // Validate form
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
       setFormStatus({
-        status: 'error',
-        message: 'Please fill in all fields'
+        status: "error",
+        message: "Please fill in all fields",
       });
       return;
     }
-    
+
     setFormStatus({
-      status: 'loading',
-      message: 'Sending your message...'
+      status: "loading",
+      message: "Sending your message...",
     });
-    
+
     try {
-      const response = await fetch('/api/sendEmail', {
-        method: 'POST',
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      
+
       const data = await response.json();
-      
+
       if (response.ok) {
         setFormStatus({
-          status: 'success',
-          message: 'Message sent successfully!'
+          status: "success",
+          message: "Message sent successfully!",
         });
-        
+
         // Reset form
         setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
         });
       } else {
-        throw new Error(data.message || 'Error sending message');
+        throw new Error(data.message || "Error sending message");
       }
     } catch (error) {
       setFormStatus({
-        status: 'error',
-        message: error instanceof Error ? error.message : 'Error sending message'
+        status: "error",
+        message:
+          error instanceof Error ? error.message : "Error sending message",
       });
     }
   };
@@ -80,15 +88,18 @@ export default function ContactSection() {
     <section id="contact" className="pt-8 pb-10 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="heading-container text-center">
-          <h2 className="mb-10 text-center font-bold tracking-wider leading-tight" style={{ fontSize: "clamp(40px, 10vw, 70px)" }}>
+          <h2
+            className="mb-10 text-center font-bold tracking-wider leading-tight"
+            style={{ fontSize: "clamp(40px, 10vw, 70px)" }}
+          >
             <span className="text-white">CONTACT </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">US</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+              US
+            </span>
           </h2>
-          <motion.div 
-            className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full"
-          />
+          <motion.div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full" />
         </div>
-        
+
         <div className="mt-12 w-full max-w-3xl mx-auto mb-16">
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name Field */}
@@ -106,7 +117,7 @@ export default function ContactSection() {
                 className="w-full bg-black/30 text-white border-none px-8 py-4 focus:outline-none z-10 relative"
               />
             </div>
-            
+
             {/* Email Field */}
             <div className="input-box-container relative">
               <div className="a l"></div>
@@ -122,7 +133,7 @@ export default function ContactSection() {
                 className="w-full bg-black/30 text-white border-none px-8 py-4 focus:outline-none z-10 relative"
               />
             </div>
-            
+
             {/* Subject Field */}
             <div className="input-box-container relative">
               <div className="a l"></div>
@@ -138,7 +149,7 @@ export default function ContactSection() {
                 className="w-full bg-black/30 text-white border-none px-8 py-4 focus:outline-none z-10 relative"
               />
             </div>
-            
+
             {/* Message Field */}
             <div className="input-box-container relative">
               <div className="a l"></div>
@@ -154,12 +165,12 @@ export default function ContactSection() {
                 className="w-full bg-black/30 text-white border-none px-8 py-4 resize-none focus:outline-none z-10 relative"
               ></textarea>
             </div>
-            
+
             {/* Submit Button */}
             <div className="flex justify-center mt-8">
               <button
                 type="submit"
-                disabled={formStatus.status === 'loading'}
+                disabled={formStatus.status === "loading"}
                 className="button-container relative"
               >
                 <div className="a l"></div>
@@ -167,13 +178,17 @@ export default function ContactSection() {
                 <div className="a t"></div>
                 <div className="a b"></div>
                 <div className="button-content px-10 py-3 text-white text-lg">
-                  {formStatus.status === 'loading' ? 'Sending...' : 'Send Message'}
+                  {formStatus.status === "loading"
+                    ? "Sending..."
+                    : "Send Message"}
                 </div>
               </button>
             </div>
-            
+
             {formStatus.message && (
-              <div className={`text-center mt-4 ${formStatus.status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+              <div
+                className={`text-center mt-4 ${formStatus.status === "success" ? "text-green-400" : "text-red-400"}`}
+              >
                 {formStatus.message}
               </div>
             )}
@@ -200,7 +215,7 @@ export default function ContactSection() {
           width: 100%;
           transition: all 0.3s ease;
         }
-        
+
         .input-box-container:hover {
           transform: translateY(-2px);
         }
@@ -210,7 +225,8 @@ export default function ContactSection() {
           position: absolute;
           inset: 0;
           opacity: 0;
-          background: radial-gradient(
+          background:
+            radial-gradient(
               circle at 50% 50%,
               #0000 0,
               #0000 20%,
@@ -234,7 +250,8 @@ export default function ContactSection() {
           --t: -20px;
           --s: calc(var(--t) * -1);
           --e: calc(100% + var(--t));
-          --g: #fff0, #fff3 var(--s), #fffa var(--s), #fff, #fffa var(--e),
+          --g:
+            #fff0, #fff3 var(--s), #fffa var(--s), #fff, #fffa var(--e),
             #fff3 var(--e), #fff0;
         }
 
@@ -318,7 +335,8 @@ export default function ContactSection() {
           position: absolute;
           inset: 0;
           opacity: 0;
-          background: radial-gradient(
+          background:
+            radial-gradient(
               circle at 50% 50%,
               #0000 0,
               #0000 20%,
@@ -345,4 +363,4 @@ export default function ContactSection() {
       `}</style>
     </section>
   );
-} 
+}

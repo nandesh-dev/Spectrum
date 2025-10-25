@@ -22,21 +22,21 @@ export const ContainerScroll = ({
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
-      
+
       const rect = containerRef.current.getBoundingClientRect();
       const offsetTop = rect.top;
       const windowHeight = window.innerHeight;
-      
+
       // Calculate progress (0 to 1 as element transitions from bottom to top of viewport)
-      let progress = 1 - (offsetTop / windowHeight);
+      let progress = 1 - offsetTop / windowHeight;
       progress = Math.max(0, Math.min(0.5, progress));
-      
+
       setScrollRatio(progress);
     };
-    
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Initial calculation
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -46,7 +46,7 @@ export const ContainerScroll = ({
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => {
@@ -57,18 +57,18 @@ export const ContainerScroll = ({
   // Calculate values directly from scroll ratio
   const calculateValues = () => {
     // Map scroll ratio (0-0.5) to rotation (15/30-0)
-    const rotateValue = isMobile 
-      ? 15 * (1 - (scrollRatio * 2)) 
-      : 30 * (1 - (scrollRatio * 2));
-    
+    const rotateValue = isMobile
+      ? 15 * (1 - scrollRatio * 2)
+      : 30 * (1 - scrollRatio * 2);
+
     // Map scroll ratio to scale
     const scaleValue = isMobile
-      ? 0.7 + (scrollRatio * 2 * 0.2) // 0.7 to 0.9
-      : 1.05 - (scrollRatio * 2 * 0.05); // 1.05 to 1
-    
+      ? 0.7 + scrollRatio * 2 * 0.2 // 0.7 to 0.9
+      : 1.05 - scrollRatio * 2 * 0.05; // 1.05 to 1
+
     // Map scroll ratio to translateY
     const translateValue = -50 * scrollRatio * 2; // 0 to -50
-    
+
     return { rotateValue, scaleValue, translateValue };
   };
 
@@ -87,7 +87,7 @@ export const ContainerScroll = ({
           perspective: "1000px",
         }}
       >
-        <div 
+        <div
           className="max-w-5xl mx-auto text-center"
           style={{ transform: `translateY(${translateValue}px)` }}
         >
@@ -97,7 +97,8 @@ export const ContainerScroll = ({
           className="w-full h-[30rem] md:h-auto md:aspect-[16/9] bg-[#222222] rounded-[30px] p-2 md:p-8 overflow-hidden"
           style={{
             transform: `rotateX(${rotateValue}deg) scale(${scaleValue})`,
-            boxShadow: "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
+            boxShadow:
+              "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
           }}
         >
           {children}
@@ -108,22 +109,18 @@ export const ContainerScroll = ({
 };
 
 // Keep these interfaces for compatibility, but implement them without the problematic hooks
-export const Header = ({ 
-  titleComponent 
+export const Header = ({
+  titleComponent,
 }: {
   translate?: unknown; // Marked as optional but kept for compatibility
   titleComponent: string | React.ReactNode;
 }) => {
-  return (
-    <div className="max-w-5xl mx-auto text-center">
-      {titleComponent}
-    </div>
-  );
+  return <div className="max-w-5xl mx-auto text-center">{titleComponent}</div>;
 };
 
-export const Card = ({ 
+export const Card = ({
   children,
-}: { 
+}: {
   rotate?: unknown; // All made optional but kept for compatibility
   scale?: unknown;
   translate?: unknown;
@@ -135,4 +132,4 @@ export const Card = ({
       {children}
     </div>
   );
-}; 
+};

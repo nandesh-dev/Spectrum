@@ -1,6 +1,6 @@
-declare module 'nodemailer';
+declare module "nodemailer";
 
-declare module 'nodemailer' {
+declare module "nodemailer" {
   export interface SendMailOptions {
     from?: string;
     to?: string | string[];
@@ -29,7 +29,7 @@ declare module 'nodemailer' {
     textEncoding?: {
       textEncoding: string;
     };
-    priority?: 'high' | 'normal' | 'low';
+    priority?: "high" | "normal" | "low";
     references?: string | string[];
     replyTo?: string;
   }
@@ -61,11 +61,11 @@ declare module 'nodemailer' {
   }
 
   export function createTransport(options: TransportOptions): Transporter;
-  
+
   const nodemailer: {
     createTransport: typeof createTransport;
   };
-  
+
   export default nodemailer;
 }
 
@@ -77,4 +77,4 @@ type Attachment = {
   encoding?: string;
   headers?: Record<string, string>;
   raw?: string | Buffer;
-}; 
+};

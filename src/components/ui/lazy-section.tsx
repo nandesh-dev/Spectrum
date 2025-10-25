@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { createLazyObserver } from '@/lib/utils';
+import React, { useEffect, useRef, useState } from "react";
+import { createLazyObserver } from "@/lib/utils";
 
 interface LazySectionProps {
   children: React.ReactNode;
@@ -20,37 +20,41 @@ interface LazySectionProps {
 export function LazySection({
   children,
   id,
-  className = '',
-  preloadDistance = '200px',
-  threshold = 0.01
+  className = "",
+  preloadDistance = "200px",
+  threshold = 0.01,
 }: LazySectionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const hasLoaded = useRef(false);
-  
+
   useEffect(() => {
     // If SSR or already loaded, render immediately
-    if (typeof window === 'undefined' || hasLoaded.current) {
+    if (typeof window === "undefined" || hasLoaded.current) {
       setIsVisible(true);
       return;
     }
-    
+
     const { observe } = createLazyObserver({
       rootMargin: preloadDistance,
-      threshold
+      threshold,
     });
-    
-    const cleanup = observe(sectionRef.current, () => {
-      setIsVisible(true);
-      hasLoaded.current = true;
-    }, true);
-    
+
+    const cleanup = observe(
+      sectionRef.current,
+      () => {
+        setIsVisible(true);
+        hasLoaded.current = true;
+      },
+      true,
+    );
+
     return cleanup;
   }, [preloadDistance, threshold]);
-  
+
   // Default section styling - avoid transform and will-change which can interfere with framer-motion
   const sectionClasses = `${className}`;
-  
+
   return (
     <section
       ref={sectionRef}
@@ -59,9 +63,14 @@ export function LazySection({
       data-loaded={isVisible}
     >
       {/* Always render children but optimize visibility */}
-      <div style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 0.3s ease-in' }}>
+      <div
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: "opacity 0.3s ease-in",
+        }}
+      >
         {children}
       </div>
     </section>
   );
-} 
+}

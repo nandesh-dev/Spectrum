@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { FiChevronDown } from 'react-icons/fi';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { FiChevronDown } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 export default function FAQsSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -14,84 +14,93 @@ export default function FAQsSection() {
   const faqs = [
     {
       question: "What is the team size?",
-      answer: "4 - 6"
+      answer: "4 - 6",
     },
     {
       question: "What's the registration cost?",
-      answer: "Zero. Nil. Nada."
+      answer: "Zero. Nil. Nada.",
     },
     {
       question: "Who all can attend?",
-      answer: "Students from colleges all over India are eligible to attend. Spectrum'25 welcomes students and technology enthusiasts eager to explore innovation and solve complex problems. Whether you're just starting your journey or an experienced developer looking to push boundaries, this hackathon provides an inclusive platform for individuals and teams of all backgrounds to collaborate and create."
+      answer:
+        "Students from colleges all over India are eligible to attend. Spectrum'25 welcomes students and technology enthusiasts eager to explore innovation and solve complex problems. Whether you're just starting your journey or an experienced developer looking to push boundaries, this hackathon provides an inclusive platform for individuals and teams of all backgrounds to collaborate and create.",
     },
     {
       question: "Will sleeping arrangements be provided?",
-      answer: "No, but you'll be too engaged with exciting activities and high-energy coding to even think about sleep!"
+      answer:
+        "No, but you'll be too engaged with exciting activities and high-energy coding to even think about sleep!",
     },
     {
       question: "What all should I bring to the event?",
-      answer: "<ul class='list-disc pl-5'><li>Extension Boards (for power🔌)</li><li>Snacks and Drinks (for power⚡)</li><li>Laptops (for power👾)</li></ul>"
+      answer:
+        "<ul class='list-disc pl-5'><li>Extension Boards (for power🔌)</li><li>Snacks and Drinks (for power⚡)</li><li>Laptops (for power👾)</li></ul>",
     },
     {
       question: "When will application close?",
-      answer: "Applications will remain open until April 3rd, 2025.<br /><br />Our team will review applications continuously and notify you by email if you're accepted. Once accepted, you'll need to RSVP to confirm your in-person attendance."
+      answer:
+        "Applications will remain open until April 3rd, 2025.<br /><br />Our team will review applications continuously and notify you by email if you're accepted. Once accepted, you'll need to RSVP to confirm your in-person attendance.",
     },
     {
       question: "It is my first hackathon, what's something i should know?",
-      answer: "Your first hackathon is all about <strong>learning, collaborating, and exploring new possibilities</strong>. Focus on building something <strong>functional and impactful</strong> rather than striving for perfection. Engage with others, ask questions, and be open to refining your idea along the way. You might connect with like-minded individuals or even find a future co-founder for an idea you've been wanting to pursue. <strong>Spectrum'25 could be the gateway to incredible opportunities during your college years.</strong> Most importantly, enjoy the journey—it's not just about winning, but about the experience and growth you gain! 🚀"
+      answer:
+        "Your first hackathon is all about <strong>learning, collaborating, and exploring new possibilities</strong>. Focus on building something <strong>functional and impactful</strong> rather than striving for perfection. Engage with others, ask questions, and be open to refining your idea along the way. You might connect with like-minded individuals or even find a future co-founder for an idea you've been wanting to pursue. <strong>Spectrum'25 could be the gateway to incredible opportunities during your college years.</strong> Most importantly, enjoy the journey—it's not just about winning, but about the experience and growth you gain! 🚀",
     },
     {
       question: "Do we need to have the entire idea fully working?",
-      answer: "It is not necessary to implement the complete idea. To enable the judges to assess the entry, it must, nevertheless, be operational."
+      answer:
+        "It is not necessary to implement the complete idea. To enable the judges to assess the entry, it must, nevertheless, be operational.",
     },
     {
       question: "What are the online and offline rounds?",
-      answer: "<p class='font-semibold text-white'>Online Round</p><p class='mb-4'>Submit your idea presentations via the Devfolio platform. Registrations close on <em>April 3, 2025</em>, and shortlisted teams will be announced within two days after the deadline.</p><p class='font-semibold text-white'>Offline Round</p><p>Selected teams will gather at the venue on April 11 for an intense 24-hour hackathon, where they'll bring their ideas to life.</p>"
-    }
+      answer:
+        "<p class='font-semibold text-white'>Online Round</p><p class='mb-4'>Submit your idea presentations via the Devfolio platform. Registrations close on <em>April 3, 2025</em>, and shortlisted teams will be announced within two days after the deadline.</p><p class='font-semibold text-white'>Offline Round</p><p>Selected teams will gather at the venue on April 11 for an intense 24-hour hackathon, where they'll bring their ideas to life.</p>",
+    },
   ];
 
   return (
     <section id="faqs" className="min-h-screen pt-8 pb-16 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="heading-container text-center">
-          <h2 className="mb-10 text-center font-bold tracking-wider leading-tight" style={{ fontSize: "clamp(40px, 10vw, 70px)" }}>
+          <h2
+            className="mb-10 text-center font-bold tracking-wider leading-tight"
+            style={{ fontSize: "clamp(40px, 10vw, 70px)" }}
+          >
             <span className="text-white">FREQUENTLY ASKED </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">QUESTIONS</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+              QUESTIONS
+            </span>
           </h2>
-          <motion.div 
-            className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full"
-          />
+          <motion.div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full" />
         </div>
-        
+
         <div className="mt-12 space-y-4 w-full">
           {faqs.map((faq, index) => (
-            <div 
-              key={index} 
-              className="faq-container w-full"
-            >
+            <div key={index} className="faq-container w-full">
               <div className="a l"></div>
               <div className="a r"></div>
               <div className="a t"></div>
               <div className="a b"></div>
               <div className="faq-content">
-                <button 
+                <button
                   onClick={() => toggleFaq(index)}
                   className="w-full text-left p-6 flex justify-between items-start"
                   aria-expanded={openIndex === index}
                 >
-                  <h3 className="text-xl md:text-2xl font-bold text-white pr-8">{faq.question}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-white pr-8">
+                    {faq.question}
+                  </h3>
                   <div className="chevron-container">
-                    <FiChevronDown 
-                      className={`chevron-icon text-purple-400 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`} 
+                    <FiChevronDown
+                      className={`chevron-icon text-purple-400 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}
                     />
                   </div>
                 </button>
-                
-                <div 
-                  className={`overflow-hidden transition-all duration-300 px-6 ${openIndex === index ? 'max-h-[500px] pb-6 opacity-100' : 'max-h-0 opacity-0'}`}
+
+                <div
+                  className={`overflow-hidden transition-all duration-300 px-6 ${openIndex === index ? "max-h-[500px] pb-6 opacity-100" : "max-h-0 opacity-0"}`}
                 >
-                  <div 
-                    className="text-lg text-purple-300" 
+                  <div
+                    className="text-lg text-purple-300"
                     dangerouslySetInnerHTML={{ __html: faq.answer }}
                   />
                 </div>
@@ -122,7 +131,7 @@ export default function FAQsSection() {
           max-width: 900px;
           margin: 0 auto;
         }
-        
+
         .faq-container:hover {
           transform: translateY(-2px);
         }
@@ -133,7 +142,7 @@ export default function FAQsSection() {
           color: rgba(255, 255, 255, 0.85);
           width: 100%;
         }
-        
+
         /* Ensure consistent icon sizing */
         .faq-content .chevron-container {
           display: flex;
@@ -143,7 +152,7 @@ export default function FAQsSection() {
           width: 2rem;
           height: 2rem;
         }
-        
+
         .faq-content .chevron-icon {
           width: 1.25rem;
           height: 1.25rem;
@@ -154,7 +163,8 @@ export default function FAQsSection() {
           position: absolute;
           inset: 0;
           opacity: 0;
-          background: radial-gradient(
+          background:
+            radial-gradient(
               circle at 50% 50%,
               #0000 0,
               #0000 20%,
@@ -178,7 +188,8 @@ export default function FAQsSection() {
           --t: -20px;
           --s: calc(var(--t) * -1);
           --e: calc(100% + var(--t));
-          --g: #fff0, #fff3 var(--s), #fffa var(--s), #fff, #fffa var(--e),
+          --g:
+            #fff0, #fff3 var(--s), #fffa var(--s), #fff, #fffa var(--e),
             #fff3 var(--e), #fff0;
         }
 
@@ -245,17 +256,17 @@ export default function FAQsSection() {
             margin-right: auto;
             max-width: none;
           }
-          
+
           .faq-content h3 {
             font-size: 1.125rem;
             line-height: 1.5;
           }
-          
+
           .faq-content button {
             padding: 1rem;
             align-items: flex-start;
           }
-          
+
           .faq-content button > div {
             margin-top: 0.125rem;
           }
@@ -263,5 +274,4 @@ export default function FAQsSection() {
       `}</style>
     </section>
   );
-} 
-
+}

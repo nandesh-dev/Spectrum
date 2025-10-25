@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { BeamsBackgroundDemo } from '@/components/ui/beams-background-demo';
-import { motion } from 'framer-motion';
+import { BeamsBackgroundDemo } from "@/components/ui/beams-background-demo";
+import { motion } from "framer-motion";
 
 export default function BeamsTestPage() {
   return (
@@ -13,4 +13,4 @@ export default function BeamsTestPage() {
       <BeamsBackgroundDemo />
     </motion.div>
   );
-} 
+}

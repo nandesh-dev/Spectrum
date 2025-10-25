@@ -81,7 +81,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                   mode: "repulse",
                 },
                 resize: {
-                  enable: true
+                  enable: true,
                 },
               },
               modes: {
@@ -433,4 +433,4 @@ export const SparklesCore = (props: ParticlesProps) => {
       )}
     </motion.div>
   );
-}; 
+};

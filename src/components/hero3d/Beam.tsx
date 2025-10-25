@@ -1,8 +1,8 @@
-import { ReactNode, forwardRef, useImperativeHandle, useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import { useTexture } from '@react-three/drei';
-import * as THREE from 'three';
-import { Reflect } from './Reflect';
+import { ReactNode, forwardRef, useImperativeHandle, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { useTexture } from "@react-three/drei";
+import * as THREE from "three";
+import { Reflect } from "./Reflect";
 
 interface BeamProps {
   children?: ReactNode;
@@ -27,18 +27,31 @@ export interface ReflectRef {
   end: THREE.Vector3;
   raycaster: THREE.Raycaster;
   positions: Float32Array;
-  setRay: (start?: [number, number, number], end?: [number, number, number]) => void;
+  setRay: (
+    start?: [number, number, number],
+    end?: [number, number, number],
+  ) => void;
   update: () => number;
 }
 
 const Beam = forwardRef<ReflectRef, BeamProps>(
-  ({ children, bounce = 15, far = 25, position = [0, 0, 0], stride = 2, width = 6 }, ref) => {
+  (
+    {
+      children,
+      bounce = 15,
+      far = 25,
+      position = [0, 0, 0],
+      stride = 2,
+      width = 6,
+    },
+    ref,
+  ) => {
     const streaks = useRef<THREE.InstancedMesh>(null);
     const glow = useRef<THREE.InstancedMesh>(null);
     const reflect = useRef<ReflectRef>(null);
     const [streakTexture, glowTexture] = useTexture([
-      '/textures/lensflare/lensflare2.png',
-      '/textures/lensflare/lensflare0_bw.jpg'
+      "/textures/lensflare/lensflare2.png",
+      "/textures/lensflare/lensflare0_bw.jpg",
     ]);
 
     const obj = new THREE.Object3D();
@@ -50,7 +63,7 @@ const Beam = forwardRef<ReflectRef, BeamProps>(
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       toneMapped: false,
-      opacity: 1.0
+      opacity: 1.0,
     };
 
     useFrame(() => {
@@ -79,7 +92,7 @@ const Beam = forwardRef<ReflectRef, BeamProps>(
 
       for (let i = 1; i < range; i++) {
         obj.position.fromArray(reflect.current.positions, i * 3);
-        obj.scale.setScalar(0.8);  // Reduced glow scale for faster updates
+        obj.scale.setScalar(0.8); // Reduced glow scale for faster updates
         obj.rotation.set(0, 0, 0);
         obj.updateMatrix();
         glow.current.setMatrixAt(i, obj.matrix);
@@ -91,7 +104,7 @@ const Beam = forwardRef<ReflectRef, BeamProps>(
 
     useImperativeHandle(ref, () => {
       if (!reflect.current) {
-        throw new Error('Reflect component not initialized');
+        throw new Error("Reflect component not initialized");
       }
       return reflect.current;
     }, []);
@@ -101,20 +114,28 @@ const Beam = forwardRef<ReflectRef, BeamProps>(
         <Reflect ref={reflect} bounce={bounce} far={far}>
           {children}
         </Reflect>
-        <instancedMesh ref={streaks} args={[undefined, undefined, 100]} instanceMatrix-usage={THREE.DynamicDrawUsage}>
+        <instancedMesh
+          ref={streaks}
+          args={[undefined, undefined, 100]}
+          instanceMatrix-usage={THREE.DynamicDrawUsage}
+        >
           <planeGeometry />
           <meshBasicMaterial map={streakTexture} {...config} opacity={1.0} />
         </instancedMesh>
-        <instancedMesh ref={glow} args={[undefined, undefined, 100]} instanceMatrix-usage={THREE.DynamicDrawUsage}>
+        <instancedMesh
+          ref={glow}
+          args={[undefined, undefined, 100]}
+          instanceMatrix-usage={THREE.DynamicDrawUsage}
+        >
           <planeGeometry />
           <meshBasicMaterial map={glowTexture} {...config} opacity={0.8} />
         </instancedMesh>
       </group>
     );
-  }
+  },
 );
 
-Beam.displayName = 'Beam';
+Beam.displayName = "Beam";
 
 export { Beam };
-export type { BeamProps }; 
+export type { BeamProps };

@@ -1,12 +1,16 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Card } from '@/components/ui/card';
-import { TwitterLogoIcon, LinkedInLogoIcon, GitHubLogoIcon, InstagramLogoIcon } from '@radix-ui/react-icons';
-import { GlobeIcon } from 'lucide-react';
-
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Card } from "@/components/ui/card";
+import {
+  TwitterLogoIcon,
+  LinkedInLogoIcon,
+  GitHubLogoIcon,
+  InstagramLogoIcon,
+} from "@radix-ui/react-icons";
+import { GlobeIcon } from "lucide-react";
 
 interface Organizer {
   id: number;
@@ -42,10 +46,11 @@ const organizers: Organizer[] = [
     imageUrl: "/ospc.png",
     socialLinks: {
       twitter: "https://twitter.com/ospcvitc",
-      linkedin: "https://www.linkedin.com/company/opensource-programming-club-vitc",
+      linkedin:
+        "https://www.linkedin.com/company/opensource-programming-club-vitc",
       github: "https://github.com/OSPC-VITC",
       website: "https://ospcvitc.club",
-    }
+    },
   },
   {
     id: 2,
@@ -55,8 +60,8 @@ const organizers: Organizer[] = [
     imageUrl: "/csed.png",
     socialLinks: {
       twitter: "https://twitter.com/vitchennai",
-      linkedin: "https://linkedin.com/school/vit-chennai"
-    }
+      linkedin: "https://linkedin.com/school/vit-chennai",
+    },
   },
 ];
 
@@ -68,8 +73,8 @@ const partners: Partner[] = [
     bio: "Vertex Innovate is an EdTech entertainment platform connecting students across colleges, fostering collaboration, and bridging academia with industry—making learning fun and interactive!",
     imageUrl: "/vertex.png",
     socialLinks: {
-      website: "https://www.instagram.com/vertex_innovate/"
-    }
+      website: "https://www.instagram.com/vertex_innovate/",
+    },
   },
   {
     id: 4,
@@ -78,9 +83,9 @@ const partners: Partner[] = [
     bio: "IBM Z Community VIT Chennai unites tech enthusiasts to explore enterprise computing. We empower students through cutting-edge tech, challenges and industry mentorship.",
     imageUrl: "/IBMz.jpg",
     socialLinks: {
-      website: "https://www.instagram.com/ibmzcommunity.vitc"
-    }
-  }
+      website: "https://www.instagram.com/ibmzcommunity.vitc",
+    },
+  },
 ];
 
 const OrganisersSection: React.FC = () => {
@@ -92,20 +97,25 @@ const OrganisersSection: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16 space-y-6"
         >
-          
-          
-          <h2 className="mb-10 text-center font-bold tracking-wider leading-tight" style={{ fontSize: "clamp(40px, 10vw, 70px)" }}>
+          <h2
+            className="mb-10 text-center font-bold tracking-wider leading-tight"
+            style={{ fontSize: "clamp(40px, 10vw, 70px)" }}
+          >
             <span className="text-white">MEET OUR </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">ORGANISERS</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+              ORGANISERS
+            </span>
           </h2>
-          <motion.div 
+          <motion.div
             className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full"
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: "8rem", opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           />
           <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            SPECTRUM is powered by OSPC x CSED, with Vertex Innovate as our community partner, bringing together the best minds to create an electrifying innovation battlefield.
+            SPECTRUM is powered by OSPC x CSED, with Vertex Innovate as our
+            community partner, bringing together the best minds to create an
+            electrifying innovation battlefield.
           </p>
         </motion.div>
 
@@ -137,30 +147,46 @@ const OrganisersSection: React.FC = () => {
                       />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-3">
                     <div className="space-y-2">
-                      <h3 className="text-3xl font-bold text-white tracking-wide">{organizer.name}</h3>
-                      <p className="text-purple-400 font-medium text-lg">{organizer.role}</p>
-                      <p className="text-gray-300 leading-relaxed text-base">{organizer.bio}</p>
+                      <h3 className="text-3xl font-bold text-white tracking-wide">
+                        {organizer.name}
+                      </h3>
+                      <p className="text-purple-400 font-medium text-lg">
+                        {organizer.role}
+                      </p>
+                      <p className="text-gray-300 leading-relaxed text-base">
+                        {organizer.bio}
+                      </p>
                     </div>
 
                     <div className="flex gap-4 mt-4">
-                      {Object.entries(organizer.socialLinks).map(([platform, url]) => (
-                        <a
-                          key={platform}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-purple-400 hover:text-purple-300 transition-colors"
-                        >
-                          <span className="sr-only">{platform}</span>
-                          {platform === 'twitter' && <TwitterLogoIcon className="h-6 w-6" />}
-                          {platform === 'linkedin' && <LinkedInLogoIcon className="h-6 w-6" />}
-                          {platform === 'github' && <GitHubLogoIcon className="h-6 w-6" />}
-                          {platform === 'website' && <GlobeIcon className="h-6 w-6" />}
-                        </a>
-                      ))}
+                      {Object.entries(organizer.socialLinks).map(
+                        ([platform, url]) => (
+                          <a
+                            key={platform}
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-purple-400 hover:text-purple-300 transition-colors"
+                          >
+                            <span className="sr-only">{platform}</span>
+                            {platform === "twitter" && (
+                              <TwitterLogoIcon className="h-6 w-6" />
+                            )}
+                            {platform === "linkedin" && (
+                              <LinkedInLogoIcon className="h-6 w-6" />
+                            )}
+                            {platform === "github" && (
+                              <GitHubLogoIcon className="h-6 w-6" />
+                            )}
+                            {platform === "website" && (
+                              <GlobeIcon className="h-6 w-6" />
+                            )}
+                          </a>
+                        ),
+                      )}
                     </div>
                   </div>
                 </div>
@@ -176,9 +202,11 @@ const OrganisersSection: React.FC = () => {
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl mb-6 text-center font-bold tracking-wider leading-tight">
             <span className="text-white">OUR </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">PARTNERS</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
+              PARTNERS
+            </span>
           </h2>
-          <motion.div 
+          <motion.div
             className="h-1 w-32 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-10 rounded-full"
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: "8rem", opacity: 1 }}
@@ -214,12 +242,18 @@ const OrganisersSection: React.FC = () => {
                       />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <div className="space-y-1">
-                      <h3 className="text-xl font-bold text-white tracking-wide text-center">{partner.name}</h3>
-                      <p className="text-purple-400 font-medium text-sm text-center">{partner.role}</p>
-                      <p className="text-gray-300 leading-relaxed text-xs text-center">{partner.bio}</p>
+                      <h3 className="text-xl font-bold text-white tracking-wide text-center">
+                        {partner.name}
+                      </h3>
+                      <p className="text-purple-400 font-medium text-sm text-center">
+                        {partner.role}
+                      </p>
+                      <p className="text-gray-300 leading-relaxed text-xs text-center">
+                        {partner.bio}
+                      </p>
                     </div>
 
                     <div className="flex justify-center mt-1">
@@ -261,7 +295,7 @@ const OrganisersSection: React.FC = () => {
         }
 
         .glow-wrapper::before {
-          content: '';
+          content: "";
           position: absolute;
           inset: -3px;
           background: transparent;
@@ -272,14 +306,22 @@ const OrganisersSection: React.FC = () => {
         .card-container {
           position: relative;
           transition: all 0.3s ease;
-          background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(0, 0, 0, 0.4));
+          background: linear-gradient(
+            135deg,
+            rgba(168, 85, 247, 0.15),
+            rgba(0, 0, 0, 0.4)
+          );
         }
 
         .card-container::before {
-          content: '';
+          content: "";
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at center, rgba(168, 85, 247, 0.2), transparent 70%);
+          background: radial-gradient(
+            circle at center,
+            rgba(168, 85, 247, 0.2),
+            transparent 70%
+          );
           pointer-events: none;
         }
 
@@ -318,10 +360,11 @@ const OrganisersSection: React.FC = () => {
 
         .l {
           left: 0;
-          background: linear-gradient(to bottom, 
-            #fff0 0%, 
-            #fff 15%, 
-            #fff 85%, 
+          background: linear-gradient(
+            to bottom,
+            #fff0 0%,
+            #fff 15%,
+            #fff 85%,
             #fff0 100%
           );
           top: 0;
@@ -332,10 +375,11 @@ const OrganisersSection: React.FC = () => {
 
         .r {
           right: 0;
-          background: linear-gradient(to bottom, 
-            #fff0 0%, 
-            #fff 15%, 
-            #fff 85%, 
+          background: linear-gradient(
+            to bottom,
+            #fff0 0%,
+            #fff 15%,
+            #fff 85%,
             #fff0 100%
           );
           top: 0;
@@ -346,10 +390,11 @@ const OrganisersSection: React.FC = () => {
 
         .t {
           top: 0;
-          background: linear-gradient(to right, 
-            #fff0 0%, 
-            #fff 15%, 
-            #fff 85%, 
+          background: linear-gradient(
+            to right,
+            #fff0 0%,
+            #fff 15%,
+            #fff 85%,
             #fff0 100%
           );
           left: 0;
@@ -360,10 +405,11 @@ const OrganisersSection: React.FC = () => {
 
         .b {
           bottom: 0;
-          background: linear-gradient(to right, 
-            #fff0 0%, 
-            #fff 15%, 
-            #fff 85%, 
+          background: linear-gradient(
+            to right,
+            #fff0 0%,
+            #fff 15%,
+            #fff 85%,
             #fff0 100%
           );
           left: 0;

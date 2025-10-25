@@ -1,7 +1,7 @@
 "use client";
 
-import { BeamsBackground } from './beams-background';
+import { BeamsBackground } from "./beams-background";
 
 export function BeamsBackgroundDemo() {
-    return <BeamsBackground />;
-} 
+  return <BeamsBackground />;
+}

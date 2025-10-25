@@ -1,10 +1,10 @@
-import { useLoader } from '@react-three/fiber';
-import { MeshTransmissionMaterial } from '@react-three/drei';
-import { GLTFLoader } from 'three-stdlib';
-import { MeshWithRayEvents, RayEvent, RayMoveEvent } from './types';
-import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
+import { useLoader } from "@react-three/fiber";
+import { MeshTransmissionMaterial } from "@react-three/drei";
+import { GLTFLoader } from "three-stdlib";
+import { MeshWithRayEvents, RayEvent, RayMoveEvent } from "./types";
+import * as THREE from "three";
+import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
 
 interface PrismProps {
   onRayOver?: (event: RayEvent) => void;
@@ -22,8 +22,16 @@ interface GLTFResult {
   };
 }
 
-export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) {
-  const gltf = useLoader(GLTFLoader, '/gltf/prism.glb') as unknown as GLTFResult;
+export function Prism({
+  onRayOver,
+  onRayOut,
+  onRayMove,
+  ...props
+}: PrismProps) {
+  const gltf = useLoader(
+    GLTFLoader,
+    "/gltf/prism.glb",
+  ) as unknown as GLTFResult;
   const { nodes } = gltf;
   const spectrumRef = useRef<THREE.Mesh>(null);
   const linesRef = useRef<THREE.Mesh>(null);
@@ -49,13 +57,13 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
     rotation: [Math.PI / 2, Math.PI, 0],
     onRayOver,
     onRayOut,
-    onRayMove
+    onRayMove,
   };
 
   // Custom shader for rainbow effect
   const spectrumShader = {
     uniforms: {
-      time: { value: 0 }
+      time: { value: 0 },
     },
     vertexShader: `
       varying vec2 vUv;
@@ -80,13 +88,13 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
         vec3 color = rainbow(vUv.y);
         gl_FragColor = vec4(color, 0.8);
       }
-    `
+    `,
   } as const;
 
   // Custom shader for internal lines
   const linesShader = {
     uniforms: {
-      time: { value: 0 }
+      time: { value: 0 },
     },
     vertexShader: `
       varying vec2 vUv;
@@ -143,7 +151,7 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
         
         gl_FragColor = vec4(finalColor, min(lines * 0.95 + glow * 0.3, 1.0));
       }
-    `
+    `,
   } as const;
 
   if (!nodes?.Cone?.geometry) {
@@ -158,7 +166,13 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
         <meshBasicMaterial visible={false} />
       </mesh>
       {/* Glowing border mesh - outer layer */}
-      <mesh position={[0, 0, 0.6]} renderOrder={9} scale={2.04} dispose={null} geometry={nodes.Cone.geometry}>
+      <mesh
+        position={[0, 0, 0.6]}
+        renderOrder={9}
+        scale={2.04}
+        dispose={null}
+        geometry={nodes.Cone.geometry}
+      >
         <meshBasicMaterial
           color="#ffffff"
           transparent
@@ -168,7 +182,13 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
         />
       </mesh>
       {/* Glowing border mesh - inner layer */}
-      <mesh position={[0, 0, 0.6]} renderOrder={9} scale={2.02} dispose={null} geometry={nodes.Cone.geometry}>
+      <mesh
+        position={[0, 0, 0.6]}
+        renderOrder={9}
+        scale={2.02}
+        dispose={null}
+        geometry={nodes.Cone.geometry}
+      >
         <meshBasicMaterial
           color="#ffffff"
           transparent
@@ -178,12 +198,12 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
         />
       </mesh>
       {/* Internal spectrum effect */}
-      <mesh 
+      <mesh
         ref={spectrumRef}
-        position={[0, 0, 0.6]} 
-        renderOrder={7} 
-        scale={1.95} 
-        dispose={null} 
+        position={[0, 0, 0.6]}
+        renderOrder={7}
+        scale={1.95}
+        dispose={null}
         geometry={nodes.Cone.geometry}
       >
         <shaderMaterial
@@ -194,7 +214,13 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
         />
       </mesh>
       {/* The visible hi-res prism */}
-      <mesh position={[0, 0, 0.6]} renderOrder={10} scale={2} dispose={null} geometry={nodes.Cone.geometry}>
+      <mesh
+        position={[0, 0, 0.6]}
+        renderOrder={10}
+        scale={2}
+        dispose={null}
+        geometry={nodes.Cone.geometry}
+      >
         <MeshTransmissionMaterial
           clearcoat={0.8}
           transmission={0.95}
@@ -221,7 +247,13 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
         />
       </mesh>
       {/* Internal reflections mesh */}
-      <mesh position={[0, 0, 0.6]} renderOrder={8} scale={1.98} dispose={null} geometry={nodes.Cone.geometry}>
+      <mesh
+        position={[0, 0, 0.6]}
+        renderOrder={8}
+        scale={1.98}
+        dispose={null}
+        geometry={nodes.Cone.geometry}
+      >
         <meshPhysicalMaterial
           transparent
           opacity={0.4}
@@ -235,12 +267,12 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
         />
       </mesh>
       {/* Internal connecting lines */}
-      <mesh 
+      <mesh
         ref={linesRef}
-        position={[0, 0, 0.6]} 
+        position={[0, 0, 0.6]}
         renderOrder={12}
-        scale={1.96} 
-        dispose={null} 
+        scale={1.96}
+        dispose={null}
         geometry={nodes.Cone.geometry}
       >
         <shaderMaterial
@@ -254,4 +286,4 @@ export function Prism({ onRayOver, onRayOut, onRayMove, ...props }: PrismProps) 
       </mesh>
     </group>
   );
-} 
+}

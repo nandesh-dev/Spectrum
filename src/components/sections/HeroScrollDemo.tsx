@@ -14,21 +14,21 @@ export function HeroScrollDemo() {
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
-      
+
       const rect = containerRef.current.getBoundingClientRect();
       const offsetTop = rect.top;
       const windowHeight = window.innerHeight;
-      
+
       // Calculate progress (0 to 1 as element transitions from bottom to top of viewport)
-      let progress = 1 - (offsetTop / windowHeight);
+      let progress = 1 - offsetTop / windowHeight;
       progress = Math.max(0, Math.min(0.5, progress));
-      
+
       setScrollRatio(progress);
     };
-    
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll(); // Initial calculation
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -39,24 +39,24 @@ export function HeroScrollDemo() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    
+
     // Trigger scroll events to ensure animations work properly
     const triggerScrollEvents = () => {
-      window.dispatchEvent(new Event('scroll'));
+      window.dispatchEvent(new Event("scroll"));
       setTimeout(() => {
-        window.dispatchEvent(new Event('scroll'));
+        window.dispatchEvent(new Event("scroll"));
       }, 200);
     };
-    
+
     triggerScrollEvents();
-    window.addEventListener('resize', triggerScrollEvents);
-    
+    window.addEventListener("resize", triggerScrollEvents);
+
     return () => {
       window.removeEventListener("resize", checkMobile);
-      window.removeEventListener('resize', triggerScrollEvents);
+      window.removeEventListener("resize", triggerScrollEvents);
     };
   }, []);
 
@@ -65,29 +65,30 @@ export function HeroScrollDemo() {
     // Add YouTube API script if it doesn't exist
     const windowWithYT = window as unknown as { YT?: unknown };
     if (!windowWithYT.YT) {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName("script")[0];
       firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
     }
-    
+
     // Ensure iframe has correct API initialization
     const iframe = iframeRef.current;
-    if (iframe && iframe.src.indexOf('enablejsapi=1') === -1) {
-      iframe.src += iframe.src.indexOf('?') === -1 ? '?enablejsapi=1' : '&enablejsapi=1';
+    if (iframe && iframe.src.indexOf("enablejsapi=1") === -1) {
+      iframe.src +=
+        iframe.src.indexOf("?") === -1 ? "?enablejsapi=1" : "&enablejsapi=1";
     }
   }, []);
 
   // Calculate transform values based on scroll ratio
   const getTransformValues = () => {
     // Map scroll ratio (0-0.5) to rotation (35/30-0)
-    const rotateValue = isMobile 
-      ? 35 * (1 - (scrollRatio * 2)) 
-      : 30 * (1 - (scrollRatio * 2));
-    
+    const rotateValue = isMobile
+      ? 35 * (1 - scrollRatio * 2)
+      : 30 * (1 - scrollRatio * 2);
+
     // Map scroll ratio to scale
-    const scaleValue = 0.95 + (scrollRatio * 2 * 0.1); // 0.95 to 1.05
-    
+    const scaleValue = 0.95 + scrollRatio * 2 * 0.1; // 0.95 to 1.05
+
     return { rotateValue, scaleValue };
   };
 
@@ -103,7 +104,7 @@ export function HeroScrollDemo() {
             event: "command",
             func: !isMuted ? "mute" : "unMute",
           }),
-          "*"
+          "*",
         );
       }
     }
@@ -118,9 +119,15 @@ export function HeroScrollDemo() {
         allow="autoplay; encrypted-media; microphone; camera; fullscreen"
         allowFullScreen
       ></iframe>
-      <div className="absolute bottom-2 right-2 text-2xl bg-black/50 p-2 rounded-full backdrop-blur-sm cursor-pointer z-10"
-        onClick={toggleMute}>
-        {isMuted ? <FaVolumeMute className="text-white" /> : <FaVolumeUp className="text-white" />}
+      <div
+        className="absolute bottom-2 right-2 text-2xl bg-black/50 p-2 rounded-full backdrop-blur-sm cursor-pointer z-10"
+        onClick={toggleMute}
+      >
+        {isMuted ? (
+          <FaVolumeMute className="text-white" />
+        ) : (
+          <FaVolumeUp className="text-white" />
+        )}
       </div>
     </div>
   );
@@ -128,15 +135,15 @@ export function HeroScrollDemo() {
   if (isMobile) {
     // Mobile view - maintain current size with tilt
     return (
-      <div 
+      <div
         ref={containerRef}
         className="w-[90%] mx-auto"
         style={{ perspective: "1000px" }}
       >
-        <div 
+        <div
           className="w-full bg-black/80 overflow-hidden video-container"
           style={{
-            aspectRatio: "16/9", 
+            aspectRatio: "16/9",
             maxHeight: "180px",
             transform: `rotateX(${rotateValue}deg) scale(${scaleValue})`,
             transformOrigin: "center 15%",
@@ -149,10 +156,16 @@ export function HeroScrollDemo() {
           <div className="a b"></div>
           {videoContent}
         </div>
-        
+
         {/* SVG filter for animated borders */}
         <svg className="hidden">
-          <filter id="unopaq" width="3000%" x="-1000%" height="3000%" y="-1000%">
+          <filter
+            id="unopaq"
+            width="3000%"
+            x="-1000%"
+            height="3000%"
+            y="-1000%"
+          >
             <feColorMatrix
               values="1 0 0 0 0 
                       0 1 0 0 0 
@@ -161,7 +174,7 @@ export function HeroScrollDemo() {
             ></feColorMatrix>
           </filter>
         </svg>
-        
+
         <style jsx>{`
           .video-container {
             position: relative;
@@ -176,7 +189,8 @@ export function HeroScrollDemo() {
             --t: -20px;
             --s: calc(var(--t) * -1);
             --e: calc(100% + var(--t));
-            --g: #fff0, #fff5 var(--s), #fffc var(--s), #fff, #fffc var(--e),
+            --g:
+              #fff0, #fff5 var(--s), #fffc var(--s), #fff, #fffc var(--e),
               #fff5 var(--e), #fff0;
             z-index: 30;
           }
@@ -243,7 +257,7 @@ export function HeroScrollDemo() {
 
   // Desktop view - large immersive view with tilt
   return (
-    <div 
+    <div
       ref={containerRef}
       className="w-full py-6"
       style={{ perspective: "1000px" }}
@@ -264,7 +278,7 @@ export function HeroScrollDemo() {
         <div className="a b"></div>
         {videoContent}
       </div>
-      
+
       {/* SVG filter for animated borders */}
       <svg className="hidden">
         <filter id="unopaq" width="3000%" x="-1000%" height="3000%" y="-1000%">
@@ -276,7 +290,7 @@ export function HeroScrollDemo() {
           ></feColorMatrix>
         </filter>
       </svg>
-      
+
       <style jsx>{`
         .video-container {
           position: relative;
@@ -291,7 +305,8 @@ export function HeroScrollDemo() {
           --t: -20px;
           --s: calc(var(--t) * -1);
           --e: calc(100% + var(--t));
-          --g: #fff0, #fff5 var(--s), #fffc var(--s), #fff, #fffc var(--e),
+          --g:
+            #fff0, #fff5 var(--s), #fffc var(--s), #fff, #fffc var(--e),
             #fff5 var(--e), #fff0;
           z-index: 30;
         }
@@ -354,4 +369,4 @@ export function HeroScrollDemo() {
       `}</style>
     </div>
   );
-} 
+}

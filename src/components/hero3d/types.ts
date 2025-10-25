@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import * as THREE from 'three';
+import { ReactNode } from "react";
+import * as THREE from "three";
 
 export interface RainbowMaterialUniforms {
   [uniform: string]: THREE.IUniform<number | THREE.Vector3 | THREE.Matrix4>;
@@ -29,9 +29,10 @@ interface RainbowMaterialCustomProps {
   attach?: string;
 }
 
-declare module '@react-three/fiber' {
+declare module "@react-three/fiber" {
   interface ThreeElements {
-    rainbowMaterial: THREE.ShaderMaterialParameters & RainbowMaterialCustomProps;
+    rainbowMaterial: THREE.ShaderMaterialParameters &
+      RainbowMaterialCustomProps;
   }
 }
 
@@ -106,4 +107,4 @@ export interface RayMoveEvent {
   position: THREE.Vector3;
   direction: THREE.Vector3;
   normal: THREE.Vector3;
-} 
+}

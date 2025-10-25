@@ -1,8 +1,8 @@
-import { forwardRef, useRef } from 'react';
-import { extend, useFrame, useThree } from '@react-three/fiber';
-import { shaderMaterial } from '@react-three/drei';
-import * as THREE from 'three';
-import { RainbowProps, RainbowMaterialType } from './types';
+import { forwardRef, useRef } from "react";
+import { extend, useFrame, useThree } from "@react-three/fiber";
+import { shaderMaterial } from "@react-three/drei";
+import * as THREE from "three";
+import { RainbowProps, RainbowMaterialType } from "./types";
 
 export interface RainbowMesh extends THREE.Mesh {
   material: RainbowMaterialType;
@@ -16,7 +16,7 @@ const RainbowMaterial = shaderMaterial(
     startRadius: 1,
     endRadius: 0,
     emissiveIntensity: 8.0,
-    ratio: 1
+    ratio: 1,
   },
   /* glsl */ `
     varying vec2 vUv;
@@ -108,7 +108,7 @@ const RainbowMaterial = shaderMaterial(
       gl_FragColor = vec4(area * co * l * brightness * emissiveIntensity, 1.0);
       if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b < 0.01) discard;
     }
-  `
+  `,
 );
 
 extend({ RainbowMaterial });
@@ -120,14 +120,24 @@ type RainbowComponentProps = RainbowProps & {
 };
 
 export const Rainbow = forwardRef<RainbowMesh, RainbowComponentProps>(
-  ({ startRadius = 0, endRadius = 0.5, emissiveIntensity = 2.5, fade = 0.25, ...props }, fRef) => {
+  (
+    {
+      startRadius = 0,
+      endRadius = 0.5,
+      emissiveIntensity = 2.5,
+      fade = 0.25,
+      ...props
+    },
+    fRef,
+  ) => {
     const material = useRef<RainbowMaterialType>(null);
     const { width, height } = useThree((state) => state.viewport);
     const length = Math.hypot(width, height) + 1.5;
 
     useFrame((state, delta) => {
       if (material.current) {
-        material.current.uniforms.time.value += delta * material.current.uniforms.speed.value;
+        material.current.uniforms.time.value +=
+          delta * material.current.uniforms.speed.value;
         material.current.uniforms.emissiveIntensity.value = emissiveIntensity;
       }
     });
@@ -147,7 +157,7 @@ export const Rainbow = forwardRef<RainbowMesh, RainbowComponentProps>(
         />
       </mesh>
     );
-  }
+  },
 );
 
-Rainbow.displayName = 'Rainbow'; 
+Rainbow.displayName = "Rainbow";

@@ -1,5 +1,5 @@
 .container {
-  background: linear-gradient(120deg, #01020b,#01020b );
+  background: linear-gradient(120deg, #01020b, #01020b);
   color: white;
   min-height: 100vh;
   text-align: center;
@@ -31,16 +31,24 @@
 }
 
 @keyframes glow {
-  from { box-shadow: 0 0 10px white; }
-  to { box-shadow: 0 0 20px white; }
+  from {
+    box-shadow: 0 0 10px white;
+  }
+  to {
+    box-shadow: 0 0 20px white;
+  }
 }
 
 @media (max-width: 640px) {
   @keyframes glow {
-    from { box-shadow: 0 0 5px white; }
-    to { box-shadow: 0 0 10px white; }
+    from {
+      box-shadow: 0 0 5px white;
+    }
+    to {
+      box-shadow: 0 0 10px white;
+    }
   }
-  
+
   .timeline::before {
     animation: glow 4s infinite alternate;
   }
@@ -77,13 +85,21 @@
 }
 
 @keyframes pulse {
-  from { box-shadow: 0 0 10px white; }
-  to { box-shadow: 0 0 20px white; }
+  from {
+    box-shadow: 0 0 10px white;
+  }
+  to {
+    box-shadow: 0 0 20px white;
+  }
 }
 
 @media (max-width: 640px) {
   @keyframes pulse {
-    from { box-shadow: 0 0 5px white; }
-    to { box-shadow: 0 0 10px white; }
+    from {
+      box-shadow: 0 0 5px white;
+    }
+    to {
+      box-shadow: 0 0 10px white;
+    }
   }
 }

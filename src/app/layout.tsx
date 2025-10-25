@@ -89,69 +89,6 @@ export const metadata: Metadata = {
   category: "Technology",
 };
 
-// JSON-LD structured data for the event
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Event",
-  name: "Spectrum Hackathon 2025",
-  description:
-    "VIT Chennai's premier hackathon for innovation and collaboration",
-  startDate: "2025-04-11T09:00:00+05:30",
-  endDate: "2025-04-12T18:00:00+05:30",
-  eventStatus: "https://schema.org/EventScheduled",
-  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-  location: {
-    "@type": "Place",
-    name: "MG Auditorium, VIT Chennai",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Vandalur-Kelambakkam Road",
-      addressLocality: "Chennai",
-      addressRegion: "Tamil Nadu",
-      postalCode: "600127",
-      addressCountry: "IN",
-    },
-  },
-  image: "https://spectrum25.tech/logo.png",
-  organizer: [
-    {
-      "@type": "Organization",
-      name: "Open Source Programming Club (OSPC)",
-      url: "https://ospcvitc.club",
-    },
-    {
-      "@type": "Organization",
-      name: "Computer Science & Engineering Department, VIT Chennai",
-      url: "https://chennai.vit.ac.in",
-    },
-  ],
-  sponsor: [
-    {
-      "@type": "Organization",
-      name: "Radisson BLU",
-      url: "https://www.radissonhotels.com/en-us/destination/india/chennai",
-    },
-    {
-      "@type": "Organization",
-      name: "Devfolio",
-      url: "https://devfolio.co/",
-    },
-    {
-      "@type": "Organization",
-      name: "Polygon",
-      url: "https://polygon.technology/",
-    },
-  ],
-  offers: {
-    "@type": "Offer",
-    url: "https://spectrum25.tech/register",
-    price: "0",
-    priceCurrency: "INR",
-    availability: "https://schema.org/InStock",
-    validFrom: "2025-01-15T00:00:00+05:30",
-  },
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -193,12 +130,6 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-
-        {/* Structured data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
       </head>
       <body className="bg-black min-h-screen">
         {/* Performance Optimizer - Apply site-wide scroll optimizations */}

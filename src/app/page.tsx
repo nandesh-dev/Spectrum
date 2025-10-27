@@ -38,7 +38,6 @@ export default function Home() {
         <OrganisersSection />
         <SponsorsSection />
         <FAQsSection />
-        <ContactSection />
         <Footer />
       </motion.div>
     </motion.main>

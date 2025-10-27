@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, Shield } from "lucide-react"; // Only keep the icons you use
+import { Hackathon } from "@/constants/hackathon";
 
 const AboutSection: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -210,109 +211,105 @@ const AboutSection: React.FC = () => {
             variants={cardContainerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 px-3"
+            className="grid grid-flow-row md:grid-flow-col  gap-8 mt-12 px-3"
           >
             {/* First Card */}
-            <motion.div
-              variants={cardVariants}
-              whileHover="hover"
-              className="relative"
-            >
-              <Card className="relative bg-gradient-to-br from-purple-950/30 to-black/60 backdrop-blur-md overflow-hidden shadow-lg hover:shadow-purple-900/20 h-full card-container !rounded-none">
-                <div className="a l"></div>
-                <div className="a r"></div>
-                <div className="a t"></div>
-                <div className="a b"></div>
-                <CardContent className="p-8 !rounded-none">
-                  <div className="flex items-center mb-5">
-                    <motion.span
-                      className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-purple-900/20 backdrop-blur-sm group-hover:from-purple-500/30 group-hover:to-purple-900/30 transition-all duration-300 shadow-md overflow-hidden"
-                      variants={iconVariants}
-                      whileHover="hover"
-                    >
-                      <motion.div
-                        initial={{ scale: 0.8 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 0.5 }}
+            {Hackathon.eventDescription !== null && (
+              <motion.div
+                variants={cardVariants}
+                whileHover="hover"
+                className="relative"
+              >
+                <Card className="relative bg-gradient-to-br from-purple-950/30 to-black/60 backdrop-blur-md overflow-hidden shadow-lg hover:shadow-purple-900/20 h-full card-container !rounded-none">
+                  <div className="a l"></div>
+                  <div className="a r"></div>
+                  <div className="a t"></div>
+                  <div className="a b"></div>
+                  <CardContent className="p-8 !rounded-none">
+                    <div className="flex items-center mb-5">
+                      <motion.span
+                        className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-purple-900/20 backdrop-blur-sm group-hover:from-purple-500/30 group-hover:to-purple-900/30 transition-all duration-300 shadow-md overflow-hidden"
+                        variants={iconVariants}
+                        whileHover="hover"
                       >
-                        <Calendar className="h-7 w-7 text-purple-400" />
-                      </motion.div>
-                      <motion.div
-                        className="absolute inset-0 bg-purple-500/10 rounded-full"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: [0, 1.5, 0] }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          repeatDelay: 3,
-                        }}
-                      />
-                    </motion.span>
-                    <h3 className="text-2xl font-['Megrim'] ml-5 font-semibold tracking-wide text-white">
-                      The Event
-                    </h3>
-                  </div>
-                  <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                    With high-impact tracks, we push participants to think like
-                    founders, craft scalable solutions, and tackle pressing
-                    challenges. But it doesn&apos;t stop there—we&apos;re
-                    redefining the hackathon experience with live music, flash
-                    mobs, and immersive activities that ignite creativity and
-                    energy.
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
+                        <motion.div
+                          initial={{ scale: 0.8 }}
+                          animate={{ scale: 1 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <Calendar className="h-7 w-7 text-purple-400" />
+                        </motion.div>
+                        <motion.div
+                          className="absolute inset-0 bg-purple-500/10 rounded-full"
+                          initial={{ scale: 0 }}
+                          animate={{ scale: [0, 1.5, 0] }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            repeatDelay: 3,
+                          }}
+                        />
+                      </motion.span>
+                      <h3 className="text-2xl font-['Megrim'] ml-5 font-semibold tracking-wide text-white">
+                        The Event
+                      </h3>
+                    </div>
+                    <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+                      {Hackathon.eventDescription}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
 
             {/* Second Card */}
-            <motion.div
-              variants={cardVariants}
-              whileHover="hover"
-              className="relative"
-            >
-              <Card className="relative bg-gradient-to-br from-blue-950/30 to-black/60 backdrop-blur-md overflow-hidden shadow-lg hover:shadow-blue-900/20 h-full card-container !rounded-none">
-                <div className="a l"></div>
-                <div className="a r"></div>
-                <div className="a t"></div>
-                <div className="a b"></div>
-                <CardContent className="p-8 !rounded-none">
-                  <div className="flex items-center mb-5">
-                    <motion.span
-                      className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-900/20 backdrop-blur-sm group-hover:from-blue-500/30 group-hover:to-blue-900/30 transition-all duration-300 shadow-md overflow-hidden"
-                      variants={iconVariants}
-                      whileHover="hover"
-                    >
-                      <motion.div
-                        initial={{ scale: 0.8 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 0.5 }}
+            {Hackathon.approachDescription !== null && (
+              <motion.div
+                variants={cardVariants}
+                whileHover="hover"
+                className="relative"
+              >
+                <Card className="relative bg-gradient-to-br from-blue-950/30 to-black/60 backdrop-blur-md overflow-hidden shadow-lg hover:shadow-blue-900/20 h-full card-container !rounded-none">
+                  <div className="a l"></div>
+                  <div className="a r"></div>
+                  <div className="a t"></div>
+                  <div className="a b"></div>
+                  <CardContent className="p-8 !rounded-none">
+                    <div className="flex items-center mb-5">
+                      <motion.span
+                        className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-900/20 backdrop-blur-sm group-hover:from-blue-500/30 group-hover:to-blue-900/30 transition-all duration-300 shadow-md overflow-hidden"
+                        variants={iconVariants}
+                        whileHover="hover"
                       >
-                        <Shield className="h-7 w-7 text-blue-400" />
-                      </motion.div>
-                      <motion.div
-                        className="absolute inset-0 bg-blue-500/10 rounded-full"
-                        initial={{ scale: 0 }}
-                        animate={{ scale: [0, 1.5, 0] }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          repeatDelay: 3.5,
-                        }}
-                      />
-                    </motion.span>
-                    <h3 className="text-2xl font-['Megrim'] ml-5 font-semibold tracking-wide text-white">
-                      Our Approach
-                    </h3>
-                  </div>
-                  <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                    Elevating the excitement, IBM Z presents an exclusive
-                    speaker session, offering expert insights, cutting-edge
-                    trends, and practical guidance to empower your
-                    entrepreneurial journey.
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
+                        <motion.div
+                          initial={{ scale: 0.8 }}
+                          animate={{ scale: 1 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          <Shield className="h-7 w-7 text-blue-400" />
+                        </motion.div>
+                        <motion.div
+                          className="absolute inset-0 bg-blue-500/10 rounded-full"
+                          initial={{ scale: 0 }}
+                          animate={{ scale: [0, 1.5, 0] }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            repeatDelay: 3.5,
+                          }}
+                        />
+                      </motion.span>
+                      <h3 className="text-2xl font-['Megrim'] ml-5 font-semibold tracking-wide text-white">
+                        Our Approach
+                      </h3>
+                    </div>
+                    <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+                      {Hackathon.approachDescription}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            )}
           </motion.div>
         </motion.div>
       </div>

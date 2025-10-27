@@ -5,83 +5,9 @@ import { OptimizedImage } from "@/components/ui/optimized-image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-
-type TrackWithSingleImage = {
-  title: string;
-  description: string;
-  outcome: string;
-  image: string;
-  images?: never;
-};
-
-type TrackWithDualImages = {
-  title: string;
-  description: string;
-  outcome: string;
-  image?: never;
-  images: { left: string; right: string };
-};
-
-type Track = TrackWithSingleImage | TrackWithDualImages;
+import { Hackathon } from "@/constants/hackathon";
 
 export default function TracksSection() {
-  const tracks: Track[] = [
-    {
-      title: "Blockchain & Decentralized Solutions",
-      description:
-        "Foster entrepreneurship through blockchain-driven, secure, and transparent business solutions.",
-      outcome:
-        "Innovative solutions in finance, governance, and digital security.",
-      image: "/tracks/block.jpg",
-    },
-    {
-      title: "AgriTech & MedTech",
-      description:
-        "Encourage entrepreneurial innovation in agriculture and healthcare using AI and IoT.",
-      outcome:
-        "Enhanced food security, precision farming, and accessible healthcare.",
-      images: {
-        left: "/tracks/agri.jpg",
-        right: "/tracks/med.png",
-      },
-    },
-    {
-      title: "EdTech & Smart Learning",
-      description:
-        "Promote entrepreneurship in education through AI-driven and adaptive learning technologies.",
-      outcome:
-        "Improved learning accessibility, engagement, and skill development.",
-      image: "/tracks/ed.avif",
-    },
-    {
-      title: "Sustainability & Social Well-Being",
-      description:
-        "Inspire entrepreneurship for sustainability-focused and socially impactful tech solutions.",
-      outcome:
-        "Advancements in environmental conservation, clean energy, and social well-being.",
-      images: {
-        left: "/tracks/sust.webp",
-        right: "/tracks/soc.jpg",
-      },
-    },
-    {
-      title: "IoT & Smart Technologies",
-      description:
-        "Enable entrepreneurship in smart tech through AI-powered, connected, and intelligent devices.",
-      outcome:
-        "Smarter automation, predictive analytics, and efficient infrastructure.",
-      image: "/tracks/iot.jpg",
-    },
-    {
-      title: "Open Innovation",
-      description:
-        "Cultivate an entrepreneurial mindset for groundbreaking, cross-domain tech innovations.",
-      outcome:
-        "Disruptive solutions addressing real-world challenges creatively.",
-      image: "/tracks/open.jpg",
-    },
-  ];
-
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Variants for animations
@@ -169,7 +95,7 @@ export default function TracksSection() {
           animate="visible"
           className="hidden sm:flex h-[450px] gap-2 max-w-[95vw] lg:max-w-6xl mx-auto"
         >
-          {tracks.map((track, index) => (
+          {Hackathon.tracks.map((track, index) => (
             <motion.div
               key={track.title}
               custom={index}
@@ -323,7 +249,7 @@ export default function TracksSection() {
 
         {/* Mobile View */}
         <div className="sm:hidden space-y-6 max-w-md mx-auto">
-          {tracks.map((track, index) => (
+          {Hackathon.tracks.map((track, index) => (
             <motion.div
               key={track.title}
               initial={{ opacity: 0, y: 20 }}

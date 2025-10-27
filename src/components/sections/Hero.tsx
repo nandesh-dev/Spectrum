@@ -5,6 +5,7 @@ import { OptimizedImage } from "@/components/ui/optimized-image";
 import { motion } from "framer-motion";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { HeroScrollDemo } from "./HeroScrollDemo";
+import { Hackathon } from "@/constants/hackathon";
 
 // Define proper types for the component
 interface CountdownState {
@@ -22,9 +23,8 @@ const HeroSection: React.FC = () => {
     seconds: 0,
   });
 
-  // Calculate countdown to April 11, 2025
   useEffect(() => {
-    const hackathonDate = new Date("April 11, 2025 09:00:00").getTime();
+    const hackathonDate = Hackathon.startTimestamp.getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -183,7 +183,7 @@ const HeroSection: React.FC = () => {
               >
                 <FaCalendarAlt className="text-purple-400 text-lg" />
                 <span className="text-white text-sm md:text-xl font-medium">
-                  April 11-12, 2025
+                  {Hackathon.date}
                 </span>
               </motion.div>
               <motion.div
@@ -194,7 +194,7 @@ const HeroSection: React.FC = () => {
               >
                 <FaMapMarkerAlt className="text-purple-400 text-lg" />
                 <span className="text-white text-sm md:text-xl font-medium">
-                  MG Auditorium, VIT Chennai
+                  {Hackathon.location}
                 </span>
               </motion.div>
             </div>
@@ -206,7 +206,7 @@ const HeroSection: React.FC = () => {
               transition={{ delay: 0.6, duration: 0.6 }}
             >
               <a
-                href="https://spectrum25.devfolio.co/"
+                href={Hackathon.registrationUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block relative group scale-90 md:scale-100"
@@ -322,20 +322,22 @@ const HeroSection: React.FC = () => {
                 >
                   <FaCalendarAlt className="text-purple-400 text-2xl" />
                   <span className="text-white text-xl font-medium">
-                    April 11-12, 2025
+                    {Hackathon.date}
                   </span>
                 </motion.div>
-                <motion.div
-                  className="flex items-center justify-center space-x-2"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                >
-                  <FaMapMarkerAlt className="text-purple-400 text-2xl" />
-                  <span className="text-white text-xl font-medium">
-                    MG Auditorium, VIT Chennai
-                  </span>
-                </motion.div>
+                {Hackathon.location != null && (
+                  <motion.div
+                    className="flex items-center justify-center space-x-2"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4, duration: 0.6 }}
+                  >
+                    <FaMapMarkerAlt className="text-purple-400 text-2xl" />
+                    <span className="text-white text-xl font-medium">
+                      {Hackathon.location}
+                    </span>
+                  </motion.div>
+                )}
               </div>
 
               {/* Register Button */}
@@ -367,9 +369,11 @@ const HeroSection: React.FC = () => {
             </div>
 
             {/* Hero Scroll Video Demo */}
-            <div className="w-full mt-4 mb-8">
-              <HeroScrollDemo />
-            </div>
+            {Hackathon.youtubeTailer !== null && (
+              <div className="w-full mt-4 mb-8">
+                <HeroScrollDemo />
+              </div>
+            )}
           </div>
         </div>
       </motion.div>

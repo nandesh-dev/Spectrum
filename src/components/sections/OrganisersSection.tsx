@@ -11,82 +11,7 @@ import {
   InstagramLogoIcon,
 } from "@radix-ui/react-icons";
 import { GlobeIcon } from "lucide-react";
-
-interface Organizer {
-  id: number;
-  name: string;
-  role: string;
-  bio: string;
-  imageUrl: string;
-  socialLinks: {
-    twitter?: string;
-    linkedin?: string;
-    github?: string;
-    website?: string;
-  };
-}
-
-interface Partner {
-  id: number;
-  name: string;
-  role: string;
-  bio: string;
-  imageUrl: string;
-  socialLinks: {
-    website?: string;
-  };
-}
-
-const organizers: Organizer[] = [
-  {
-    id: 1,
-    name: "OSPC",
-    role: "Lead Organizer",
-    bio: "The Open Source Programming Club at VIT Chennai is dedicated to fostering innovation through open source collaboration and building a vibrant tech community on campus.",
-    imageUrl: "/ospc.png",
-    socialLinks: {
-      twitter: "https://twitter.com/ospcvitc",
-      linkedin:
-        "https://www.linkedin.com/company/opensource-programming-club-vitc",
-      github: "https://github.com/OSPC-VITC",
-      website: "https://ospcvitc.club",
-    },
-  },
-  {
-    id: 2,
-    name: "CSED",
-    role: "Co-Organizer",
-    bio: "The Centre for Social Entrepreneurship and Development (CSED) at VIT Chennai cultivates entrepreneurial leadership through social innovation, networking, and transformative learning. With dynamic events, workshops, and competitions, CSED empowers members to create sustainable impact.",
-    imageUrl: "/csed.png",
-    socialLinks: {
-      twitter: "https://twitter.com/vitchennai",
-      linkedin: "https://linkedin.com/school/vit-chennai",
-    },
-  },
-];
-
-const partners: Partner[] = [
-  {
-    id: 3,
-    name: "Vertex Innovate",
-    role: "Community Partner",
-    bio: "Vertex Innovate is an EdTech entertainment platform connecting students across colleges, fostering collaboration, and bridging academia with industry—making learning fun and interactive!",
-    imageUrl: "/vertex.png",
-    socialLinks: {
-      website: "https://www.instagram.com/vertex_innovate/",
-    },
-  },
-  {
-    id: 4,
-    name: "IBM Z Community",
-    role: "Technology Partner",
-    bio: "IBM Z Community VIT Chennai unites tech enthusiasts to explore enterprise computing. We empower students through cutting-edge tech, challenges and industry mentorship.",
-    imageUrl: "/IBMz.jpg",
-    socialLinks: {
-      website: "https://www.instagram.com/ibmzcommunity.vitc",
-    },
-  },
-];
+import { Hackathon } from "@/constants/hackathon";
 
 const OrganisersSection: React.FC = () => {
   return (
@@ -119,15 +44,15 @@ const OrganisersSection: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-24 px-3">
-          {organizers.map((organizer) => (
+        <div className="grid grid-flow-row md:grid-flow-col gap-8 max-w-4xl mx-auto mb-24 px-3 justify-center items-center">
+          {Hackathon.organizers.map((organizer) => (
             <motion.div
               key={organizer.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="glow-wrapper w-full"
+              className="glow-wrapper w-full max-w-96"
             >
               <Card className="relative h-full bg-black/20 hover:bg-black/30 transition-colors overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-purple-500/20 card-container !rounded-none">
                 <div className="a l"></div>
@@ -214,8 +139,8 @@ const OrganisersSection: React.FC = () => {
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto px-3">
-          {partners.map((partner) => (
+        <div className="grid grid-flow-row md:grid-flow-col gap-8 max-w-3xl mx-auto px-3 justify-center items-center">
+          {Hackathon.partners.map((partner) => (
             <motion.div
               key={partner.id}
               initial={{ opacity: 0, y: 50 }}

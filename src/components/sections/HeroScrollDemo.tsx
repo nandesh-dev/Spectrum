@@ -1,4 +1,5 @@
 "use client";
+import { Hackathon } from "@/constants/hackathon";
 import React, { useState, useRef, useEffect } from "react";
 import { FaVolumeMute, FaVolumeUp } from "react-icons/fa";
 
@@ -110,27 +111,30 @@ export function HeroScrollDemo() {
     }
   };
 
-  const videoContent = (
-    <div className="relative overflow-hidden w-full h-full">
-      <iframe
-        ref={iframeRef}
-        className="absolute inset-0 w-full h-full"
-        src={`https://www.youtube.com/embed/YzFK7x_LGKk?autoplay=1&mute=0&controls=0&loop=1&modestbranding=1&showinfo=0&enablejsapi=1&playlist=YzFK7x_LGKk&playsinline=1`}
-        allow="autoplay; encrypted-media; microphone; camera; fullscreen"
-        allowFullScreen
-      ></iframe>
-      <div
-        className="absolute bottom-2 right-2 text-2xl bg-black/50 p-2 rounded-full backdrop-blur-sm cursor-pointer z-10"
-        onClick={toggleMute}
-      >
-        {isMuted ? (
-          <FaVolumeMute className="text-white" />
-        ) : (
-          <FaVolumeUp className="text-white" />
-        )}
+  const videoContent =
+    Hackathon.youtubeTailer !== null ? (
+      <div className="relative overflow-hidden w-full h-full">
+        <iframe
+          ref={iframeRef}
+          className="absolute inset-0 w-full h-full"
+          src={Hackathon.youtubeTailer}
+          allow="autoplay; encrypted-media; microphone; camera; fullscreen"
+          allowFullScreen
+        ></iframe>
+        <div
+          className="absolute bottom-2 right-2 text-2xl bg-black/50 p-2 rounded-full backdrop-blur-sm cursor-pointer z-10"
+          onClick={toggleMute}
+        >
+          {isMuted ? (
+            <FaVolumeMute className="text-white" />
+          ) : (
+            <FaVolumeUp className="text-white" />
+          )}
+        </div>
       </div>
-    </div>
-  );
+    ) : (
+      <></>
+    );
 
   if (isMobile) {
     // Mobile view - maintain current size with tilt

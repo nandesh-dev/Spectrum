@@ -10,7 +10,6 @@ import JudgesSection from "@/components/sections/JudgesSection";
 import SponsorsSection from "@/components/sections/SponsorsSection";
 import OrganisersSection from "@/components/sections/OrganisersSection";
 import FAQsSection from "@/components/sections/FAQsSection";
-import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/sections/Hero";
 
